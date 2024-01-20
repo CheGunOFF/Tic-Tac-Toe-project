@@ -1,101 +1,148 @@
 #include <iostream>
-
+ /*
+ - заменить 1 и 2 на x o
+ - сделать вывод кто победил
+ - сделать счёт побед
+ - привести код в порядок!
+ 
+ 
+ */
 using namespace std;
 
 int arr[9];
 
 void display();
 void reset();
-void iswin();
+bool isvalid();
 
-
-
-
-
-
-bool isvalid(int vala, int valb = 1)  // Возврат булевого фолс, если ноль
+bool isvalid(int a = 1, int b = 1)  // Возврат булевого фолс, если ноль
 {
-	if (vala < 0 && vala > 8 || valb < 1 && valb > 2 ) {
-		return false;
+	if ((a >= 0 && a <= 9) && (b >= 1 && b <= 2)) {
+		return true;
 	}
 	else {
-		true;
+		return false;
 	}
 }
 
 
 // функция записи
-void write() 
+void write()
 {
-	signed int a;
-	signed int b;
+	int a = 1;
+	int b = 1;
 	int counter = 0;
-	display();
 
-    for (int i = 0; i < 9; ++i)
-	{
-		
-		
-		while (isvalid(arr[i])) {
-			++counter;
-			cin >> a >> b;
-			cout << counter << ". ";
-			{
-				if (arr[i] != 0) {
-					cout << "Проверка<><<<<><><";
-				}
-				else if (isvalid(arr[i]) &&
-					arr[0] == arr[1] && arr[1] == arr[2] ||
-					arr[0] == arr[4] && arr[4] == arr[8] ||
-					arr[0] == arr[3] && arr[3] == arr[6]) {
-
-					cout << "Победа<<<<0";
-					reset();
-					write();
-					break;
-				}
-				else if (isvalid(arr[i]) &&
-					arr[0] == arr[1] && arr[1] == arr[2] ||
-					arr[1] == arr[4] && arr[4] == arr[7]) {
-					cout << "Победа<<<<2";
-					reset();
-					write();
-					break;
-				}
-				else if (isvalid(arr[i]) && arr[0] == arr[1] && arr[1] == arr[2] ||
-					arr[2] == arr[4] && arr[4] == arr[6] ||
-					arr[2] == arr[5] && arr[5] == arr[8]) {
-					cout << "Победа<<<<3";
-					reset();
-					write();
-					break;
-				}
-
-				/*	1 123 159 147
-					2 123 258
-					3 123 357 369
-
-					4 147 456
-					5 456 258
-					6 456 369
-
-					7 147 753 789
-					8 789 258
-					9 789 159 369 */
-			}
-			reset();
-			write();
-			break;
-		}
-			
+	for (;;) {
+		display();
+		++counter;
+		cout << counter << ". ";
+		cin >> a >> b;
+		if (isvalid(a, b)) {    // если введённые числа истина то:
+			cout << "Верное значение..." << endl;
 			arr[a] = b;
-			display();
+
+			for (int i = a; i < 9; ++i) {
+				if ( 
+					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[1] && arr[i] == arr[2])) ||
+					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[4] && arr[i] == arr[8])) ||
+					(isvalid(i,arr[i]) && (arr[i] == arr[0] && arr[i] == arr[3] && arr[i] == arr[6])))
+				{
+					cout << "Победа<<<< 0";
+					display();
+					reset();
+					write();
+					break;
+				}
+				else if (
+					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[1] && arr[i] == arr[2])) ||
+					(isvalid(i, arr[i]) && (arr[i] == arr[1] && arr[i] == arr[7] && arr[i] == arr[7])))
+				{
+					cout << "Победа<<<< 1";
+					display();
+					reset();
+					write();
+					break;
+				}
+				else if (
+					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[1] && arr[i] == arr[2])) ||
+					(isvalid(i, arr[i]) && (arr[i] == arr[2] && arr[i] == arr[4] && arr[i] == arr[6])) ||
+					(isvalid(i, arr[i]) && (arr[i] == arr[2] && arr[i] == arr[5] && arr[i] == arr[8])))
+				{
+					cout << "Победа<<<< 2";
+					display();
+					reset();
+					write();
+					break;
+				}
+				else if (
+					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[3] && arr[i] == arr[6])) ||
+					(isvalid(i, arr[i]) && (arr[i] == arr[3] && arr[i] == arr[4] && arr[i] == arr[5])))
+				{
+					cout << "Победа<<<< 3";
+					display();
+					reset();
+					write();
+					break;
+				}
+				else if (
+					(isvalid(i, arr[i]) && (arr[i] == arr[3] && arr[i] == arr[4] && arr[i] == arr[5])) ||
+					(isvalid(i, arr[i]) && (arr[i] == arr[1] && arr[i] == arr[4] && arr[i] == arr[7])))
+				{
+					cout << "Победа<<<< 4";
+					display();
+					reset();
+					write();
+					break;
+				}
+				else if (
+					(isvalid(i, arr[i]) && (arr[i] == arr[3] && arr[i] == arr[4] && arr[i] == arr[5])) ||
+					(isvalid(i, arr[i]) && (arr[i] == arr[2] && arr[i] == arr[5] && arr[i] == arr[8])))
+				{
+					cout << "Победа<<<< 5";
+					display();
+					reset();
+					write();
+					break;
+				}
+				else if (
+					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[3] && arr[i] == arr[6])) ||
+					(isvalid(i, arr[i]) && (arr[i] == arr[6] && arr[i] == arr[4] && arr[i] == arr[2])) ||
+					(isvalid(i, arr[i]) && (arr[i] == arr[6] && arr[i] == arr[7] && arr[i] == arr[8])))
+				{
+					cout << "Победа<<<< 6";
+					display();
+					reset();
+					write();
+					break;
+				}
+				else if (
+					(isvalid(i, arr[i]) && (arr[i] == arr[6] && arr[i] == arr[7] && arr[i] == arr[8])) ||
+					(isvalid(i, arr[i]) && (arr[i] == arr[1] && arr[i] == arr[4] && arr[i] == arr[7])))
+				{
+					cout << "Победа<<<< 7";
+					display();
+					reset();
+					write();
+					break;
+				}
+				else if (
+					(isvalid(i, arr[i]) && (arr[i] == arr[6] && arr[i] == arr[7] && arr[i] == arr[8])) ||
+					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[4] && arr[i] == arr[8])) ||
+					(isvalid(i, arr[i]) && (arr[i] == arr[2] && arr[i] == arr[5] && arr[i] == arr[8])))
+				{
+					cout << "Победа<<<< 8";
+					display();
+					reset();
+					write();
+					break;
+				}
+			}
+		} else {
+			cout << "Неверное значение...";
+		}
 	}
-	reset();
-	write();
 }
-
-
 void reset() {
 	int counter = 0;
 	cout << "\n\n" << ">>>>>Новая игра";
