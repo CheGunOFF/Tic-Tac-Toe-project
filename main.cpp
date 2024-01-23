@@ -3,27 +3,6 @@
 #include <string>
 
 using namespace std;
- /*
-
- 
- - привести код в порядок!
-
-	- заменить 1 и 2 на x o - DONE
-	- сделать вывод кто победил - DONE
-	- сделать счёт побед - DONE
-
- */
-
-/*
--проверил массив на пустоту.
--если пустой, то записать,
--если полный,
--то проверить следующий индекс
--если пустой записать
--ошибка
-*/
-
-
 
 char arr[9];
 
@@ -40,7 +19,7 @@ void gameStop();
 bool gameStarted = false;
 string playerName;
 
-string scoreTable[10][3] = { {"Chegun", "121211544124584 :D"} };
+string scoreTable[10][3] = { };
 
 bool isvalid(int a = 1, char b = ' ')  // Возврат булевого фолс, если ноль | - chars
 {
@@ -49,7 +28,7 @@ bool isvalid(int a = 1, char b = ' ')  // Возврат булевого фол
 	}
 	else {
 
-		return false ;
+		return false;
 	}
 }
 
@@ -58,8 +37,8 @@ void read()
 {
 	int a;
 	char b;
-	
-	for (int i = 1;;++i) {
+
+	for (int i = 1;; ++i) {
 		display();
 		gameStart();
 		string localScore = "1";
@@ -73,7 +52,7 @@ void read()
 			cout << "It's not a number!" << endl;
 			read();
 			break;
-			
+
 		}
 
 
@@ -83,10 +62,10 @@ void read()
 			arr[a] = b;
 
 			for (int i = a; i < 9; ++i) {
-				if ( 
+				if (
 					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[1] && arr[i] == arr[2])) ||
 					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[4] && arr[i] == arr[8])) ||
-					(isvalid(i,arr[i]) && (arr[i] == arr[0] && arr[i] == arr[3] && arr[i] == arr[6])))
+					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[3] && arr[i] == arr[6])))
 				{
 					display();
 
@@ -132,7 +111,7 @@ void read()
 					(isvalid(i, arr[i]) && (arr[i] == arr[3] && arr[i] == arr[4] && arr[i] == arr[5])))
 				{
 					display();
-				
+
 					cout << "\n\n" << playerName << " - Winner !!!" << endl;
 					cout << "Take your " << localScore << " point!!!" << endl;
 
@@ -146,7 +125,7 @@ void read()
 					(isvalid(i, arr[i]) && (arr[i] == arr[1] && arr[i] == arr[4] && arr[i] == arr[7])))
 				{
 					display();
-					
+
 					cout << "\n\n" << playerName << " - Winner !!!" << endl;
 					cout << "Take your " << localScore << " point!!!" << endl;
 
@@ -175,7 +154,7 @@ void read()
 					(isvalid(i, arr[i]) && (arr[i] == arr[6] && arr[i] == arr[7] && arr[i] == arr[8])))
 				{
 					display();
-				
+
 					cout << "\n\n" << playerName << " - Winner !!!" << endl;
 					cout << "Take your " << localScore << " point!!!" << endl;
 
@@ -189,7 +168,7 @@ void read()
 					(isvalid(i, arr[i]) && (arr[i] == arr[1] && arr[i] == arr[4] && arr[i] == arr[7])))
 				{
 					display();
-				
+
 					cout << "\n\n" << playerName << " - Winner !!!" << endl;
 					cout << "Take your " << localScore << " point!!!" << endl;
 
@@ -204,7 +183,7 @@ void read()
 					(isvalid(i, arr[i]) && (arr[i] == arr[2] && arr[i] == arr[5] && arr[i] == arr[8])))
 				{
 					display();
-				
+
 					cout << "\n\n" << playerName << " - Winner !!!" << endl;
 					cout << "Take your " << localScore << " point!!!" << endl;
 
@@ -214,7 +193,8 @@ void read()
 					break;
 				}
 			}
-		} else {
+		}
+		else {
 			cout << "Wrong cahracter...";
 		}
 	}
@@ -231,7 +211,7 @@ void display() {
 	cout << "\n___________\n";
 	for (int i = 0; i < 9; ++i) {
 		cout << "[" << arr[i] << "] ";
-		
+
 		if (i == 2 || i == 5) {
 			cout << '\n';
 		}
@@ -245,43 +225,43 @@ void win(int i, string name, string score)
 }
 
 
-void testWrite(string name, string score) 
+void testWrite(string name, string score)
 {
-		for (int i = 0;; ++i) {
-		
-			if ((scoreTable[i][0] == name)) {
-				int pScore, newScore;
-				string strScore;
+	for (int i = 0;; ++i) {
 
-				pScore = atoi(scoreTable[i][1].c_str());
-				newScore = atoi(score.c_str());
-				pScore += newScore;
-				strScore = to_string(pScore);
-				scoreTable[i][1] = strScore;
-				showScore();
-				break;
-			}
-			else if ((scoreTable[i][0] == "")) {
-				score = "0";
-				scoreTable[i][0] = name;
-				scoreTable[i][1] = score;
+		if ((scoreTable[i][0] == name)) {
+			int pScore, newScore;
+			string strScore;
 
-				showScore();
-				break;
-			}
-			else if ((scoreTable[i][0] != "")){
-			}
+			pScore = atoi(scoreTable[i][1].c_str());
+			newScore = atoi(score.c_str());
+			pScore += newScore;
+			strScore = to_string(pScore);
+			scoreTable[i][1] = strScore;
+			showScore();
+			break;
 		}
+		else if ((scoreTable[i][0] == "")) {
+			score = "0";
+			scoreTable[i][0] = name;
+			scoreTable[i][1] = score;
+
+			showScore();
+			break;
+		}
+		else if ((scoreTable[i][0] != "")) {
+		}
+	}
 }
 
 void showScore() // показать массив
 {
-		cout << "\n|_Score bar_|\n";
-		cout << scoreTable[0][0] << " - " << scoreTable[0][1] << endl;
-		cout << scoreTable[1][0] << " - " << scoreTable[1][1] << endl;
-		cout << scoreTable[2][0] << " - " << scoreTable[2][1] << endl;
-		cout << "\n______________\n";
-	
+	cout << "\n|_Score bar_|\n";
+	cout << scoreTable[0][0] << " - " << scoreTable[0][1] << endl;
+	cout << scoreTable[1][0] << " - " << scoreTable[1][1] << endl;
+	cout << scoreTable[2][0] << " - " << scoreTable[2][1] << endl;
+	cout << "\n______________\n";
+
 }
 
 bool isGameStarted()
