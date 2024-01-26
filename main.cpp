@@ -1,20 +1,12 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
+#include "include.h"
 
-using namespace std;
-
-char arr[9];
+char slot[9];
 
 bool isvalid();
-bool isGameStarted();
 void display();
 void reset();
 void showScore();
-void win();
 void testWrite(string name, string score);
-void gameStart();
-void gameStop();
 
 bool gameStarted = false;
 string playerName;
@@ -40,7 +32,6 @@ void read()
 
 	for (int i = 1;; ++i) {
 		display();
-		gameStart();
 		string localScore = "1";
 		//cout << i << ". ";
 		cin >> a >> b;
@@ -55,144 +46,163 @@ void read()
 
 		}
 
+		
 
-		if (isvalid(a, b)) {    // если введённые числа истина то:
+		if (isvalid(a, b)) {    // если введённые числа истина то: 
 
 			cout << "Valid character..." << endl;
-			arr[a] = b;
 
-			for (int i = a; i < 9; ++i) {
-				if (
-					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[1] && arr[i] == arr[2])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[4] && arr[i] == arr[8])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[3] && arr[i] == arr[6])))
-				{
-					display();
-
-					cout << "\n\n" << playerName << " - Winner !!!" << endl;
-					cout << "Take your " << localScore << " point!!!" << endl;
-
-					testWrite(playerName, localScore);
+			// CHECK IS SLOT EMPTY
+			if (slot[a] == ' ') { 
+			slot[a] = b;
+			}
+			else {
+				if (slot[0] != ' ' && slot[1] != ' ' && slot[2] != ' ' &&
+					slot[3] != ' ' && slot[4] != ' ' && slot[5] != ' ' && 
+					slot[6] != ' ' && slot[7] != ' ' && slot[8] != ' ') {
+					cout << "No more slots" << endl;
 					reset();
 					read();
 					break;
 				}
-				else if (
-					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[1] && arr[i] == arr[2])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[1] && arr[i] == arr[4] && arr[i] == arr[7])))
-				{
-					display();
-
-					cout << "\n\n" << playerName << " - Winner !!!" << endl;
-					cout << "Take your " << localScore << " point!!!" << endl;
-
-					testWrite(playerName, localScore);
-					reset();
-					read();
-					break;
-				}
-				else if (
-					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[1] && arr[i] == arr[2])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[2] && arr[i] == arr[4] && arr[i] == arr[6])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[2] && arr[i] == arr[5] && arr[i] == arr[8])))
-				{
-					display();
-
-					cout << "\n\n" << playerName << " - Winner !!!" << endl;
-					cout << "Take your " << localScore << " point!!!" << endl;
-
-					testWrite(playerName, localScore);
-					reset();
-					read();
-					break;
-				}
-				else if (
-					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[3] && arr[i] == arr[6])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[3] && arr[i] == arr[4] && arr[i] == arr[5])))
-				{
-					display();
-
-					cout << "\n\n" << playerName << " - Winner !!!" << endl;
-					cout << "Take your " << localScore << " point!!!" << endl;
-
-					testWrite(playerName, localScore);
-					reset();
-					read();
-					break;
-				}
-				else if (
-					(isvalid(i, arr[i]) && (arr[i] == arr[3] && arr[i] == arr[4] && arr[i] == arr[5])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[1] && arr[i] == arr[4] && arr[i] == arr[7])))
-				{
-					display();
-
-					cout << "\n\n" << playerName << " - Winner !!!" << endl;
-					cout << "Take your " << localScore << " point!!!" << endl;
-
-					testWrite(playerName, localScore);
-					reset();
-					read();
-					break;
-				}
-				else if (
-					(isvalid(i, arr[i]) && (arr[i] == arr[3] && arr[i] == arr[4] && arr[i] == arr[5])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[2] && arr[i] == arr[5] && arr[i] == arr[8])))
-				{
-					display();
-
-					cout << "\n\n" << playerName << " - Winner !!!" << endl;
-					cout << "Take your " << localScore << " point!!!" << endl;
-
-					testWrite(playerName, localScore);
-					reset();
-					read();
-					break;
-				}
-				else if (
-					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[3] && arr[i] == arr[6])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[6] && arr[i] == arr[4] && arr[i] == arr[2])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[6] && arr[i] == arr[7] && arr[i] == arr[8])))
-				{
-					display();
-
-					cout << "\n\n" << playerName << " - Winner !!!" << endl;
-					cout << "Take your " << localScore << " point!!!" << endl;
-
-					testWrite(playerName, localScore);
-					reset();
-					read();
-					break;
-				}
-				else if (
-					(isvalid(i, arr[i]) && (arr[i] == arr[6] && arr[i] == arr[7] && arr[i] == arr[8])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[1] && arr[i] == arr[4] && arr[i] == arr[7])))
-				{
-					display();
-
-					cout << "\n\n" << playerName << " - Winner !!!" << endl;
-					cout << "Take your " << localScore << " point!!!" << endl;
-
-					testWrite(playerName, localScore);
-					reset();
-					read();
-					break;
-				}
-				else if (
-					(isvalid(i, arr[i]) && (arr[i] == arr[6] && arr[i] == arr[7] && arr[i] == arr[8])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[0] && arr[i] == arr[4] && arr[i] == arr[8])) ||
-					(isvalid(i, arr[i]) && (arr[i] == arr[2] && arr[i] == arr[5] && arr[i] == arr[8])))
-				{
-					display();
-
-					cout << "\n\n" << playerName << " - Winner !!!" << endl;
-					cout << "Take your " << localScore << " point!!!" << endl;
-
-					testWrite(playerName, localScore);
-					reset();
-					read();
-					break;
+				else {
+					cout << "Slot is not empty" << endl;
 				}
 			}
+
+			
+			for (int i = a; i < 9; ++i) {  // start slot cycle 1
+				if (
+					(isvalid(i, slot[i]) && (slot[i] == slot[0] && slot[i] == slot[1] && slot[i] == slot[2])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[0] && slot[i] == slot[4] && slot[i] == slot[8])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[0] && slot[i] == slot[3] && slot[i] == slot[6])))
+				{
+					display();
+
+					cout << "\n\n" << playerName << " - Winner !!!" << endl;
+					cout << "Take your " << localScore << " point!!!" << endl;
+
+					testWrite(playerName, localScore);
+					reset();
+					read();
+					break;
+				}
+				else if (
+					(isvalid(i, slot[i]) && (slot[i] == slot[0] && slot[i] == slot[1] && slot[i] == slot[2])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[1] && slot[i] == slot[4] && slot[i] == slot[7])))
+				{
+					display();
+
+					cout << "\n\n" << playerName << " - Winner !!!" << endl;
+					cout << "Take your " << localScore << " point!!!" << endl;
+
+					testWrite(playerName, localScore);
+					reset();
+					read();
+					break;
+				}
+				else if (
+					(isvalid(i, slot[i]) && (slot[i] == slot[0] && slot[i] == slot[1] && slot[i] == slot[2])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[2] && slot[i] == slot[4] && slot[i] == slot[6])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[2] && slot[i] == slot[5] && slot[i] == slot[8])))
+				{
+					display();
+
+					cout << "\n\n" << playerName << " - Winner !!!" << endl;
+					cout << "Take your " << localScore << " point!!!" << endl;
+
+					testWrite(playerName, localScore);
+					reset();
+					read();
+					break;
+				}
+				else if (
+					(isvalid(i, slot[i]) && (slot[i] == slot[0] && slot[i] == slot[3] && slot[i] == slot[6])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[3] && slot[i] == slot[4] && slot[i] == slot[5])))
+				{
+					display();
+
+					cout << "\n\n" << playerName << " - Winner !!!" << endl;
+					cout << "Take your " << localScore << " point!!!" << endl;
+
+					testWrite(playerName, localScore);
+					reset();
+					read();
+					break;
+				}
+				else if (
+					(isvalid(i, slot[i]) && (slot[i] == slot[3] && slot[i] == slot[4] && slot[i] == slot[5])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[1] && slot[i] == slot[4] && slot[i] == slot[7])))
+				{
+					display();
+
+					cout << "\n\n" << playerName << " - Winner !!!" << endl;
+					cout << "Take your " << localScore << " point!!!" << endl;
+
+					testWrite(playerName, localScore);
+					reset();
+					read();
+					break;
+				}
+				else if (
+					(isvalid(i, slot[i]) && (slot[i] == slot[3] && slot[i] == slot[4] && slot[i] == slot[5])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[2] && slot[i] == slot[5] && slot[i] == slot[8])))
+				{
+					display();
+
+					cout << "\n\n" << playerName << " - Winner !!!" << endl;
+					cout << "Take your " << localScore << " point!!!" << endl;
+
+					testWrite(playerName, localScore);
+					reset();
+					read();
+					break;
+				}
+				else if (
+					(isvalid(i, slot[i]) && (slot[i] == slot[0] && slot[i] == slot[3] && slot[i] == slot[6])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[6] && slot[i] == slot[4] && slot[i] == slot[2])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[6] && slot[i] == slot[7] && slot[i] == slot[8])))
+				{
+					display();
+
+					cout << "\n\n" << playerName << " - Winner !!!" << endl;
+					cout << "Take your " << localScore << " point!!!" << endl;
+
+					testWrite(playerName, localScore);
+					reset();
+					read();
+					break;
+				}
+				else if (
+					(isvalid(i, slot[i]) && (slot[i] == slot[6] && slot[i] == slot[7] && slot[i] == slot[8])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[1] && slot[i] == slot[4] && slot[i] == slot[7])))
+				{
+					display();
+
+					cout << "\n\n" << playerName << " - Winner !!!" << endl;
+					cout << "Take your " << localScore << " point!!!" << endl;
+
+					testWrite(playerName, localScore);
+					reset();
+					read();
+					break;
+				}
+				else if (
+					(isvalid(i, slot[i]) && (slot[i] == slot[6] && slot[i] == slot[7] && slot[i] == slot[8])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[0] && slot[i] == slot[4] && slot[i] == slot[8])) ||
+					(isvalid(i, slot[i]) && (slot[i] == slot[2] && slot[i] == slot[5] && slot[i] == slot[8])))
+				{
+					display();
+
+					cout << "\n\n" << playerName << " - Winner !!!" << endl;
+					cout << "Take your " << localScore << " point!!!" << endl;
+
+					testWrite(playerName, localScore);
+					reset();
+					read();
+					break;
+				}
+			}  // end of slot cycle 1
 		}
 		else {
 			cout << "Wrong cahracter...";
@@ -202,7 +212,7 @@ void read()
 void reset() {
 	cout << "\n\n" << ">>>>>New game";
 	for (int i = 0; i < 9; ++i) {
-		arr[i] = ' ';
+		slot[i] = ' ';
 	}
 }
 
@@ -210,20 +220,13 @@ void display() {
 
 	cout << "\n___________\n";
 	for (int i = 0; i < 9; ++i) {
-		cout << "[" << arr[i] << "] ";
+		cout << "[" << slot[i] << "] ";
 
 		if (i == 2 || i == 5) {
 			cout << '\n';
 		}
 	}
 }
-
-void win(int i, string name, string score)
-{
-	cout << '\n' << arr[i] << " - Winner !!!";
-
-}
-
 
 void testWrite(string name, string score)
 {
@@ -264,25 +267,10 @@ void showScore() // показать массив
 
 }
 
-bool isGameStarted()
-{
-	return gameStarted;
-}
-
-void gameStart()
-{
-	gameStarted = true;
-}
-
-void gameStop()
-{
-	gameStarted = false;
-}
-
 int main()
 {
 	system("chcp 1251>nul");
-
+	
 	string a, b;
 
 	cout << "You name..." << endl;
